@@ -15,8 +15,12 @@
             MY_LOGD("%s() cost %lfs", funName, t);               \
         } while(0)
 
-void Mat_ResizeDown(cv::Mat &mSrc, cv::Mat &mDst, int rect_size);
-void Mat_ResizeUp(cv::Mat &mSrc, cv::Mat &mDst, int rect_size);
+void CorrectGamma( cv::Mat& mSrc, cv::Mat &mDst, double gamma );
+
+void Mat_ConvertAndSplit( cv::Mat& mSrc, cv::Mat* pChannels, int code=CV_BGR2YCrCb );
+void Mat_MergeAndConvert( cv::Mat* pChannels, cv::Mat& mDst, int code=CV_YCrCb2BGR );
+void Mat_ResizeDown( cv::Mat &mSrc, cv::Mat &mDst, int rect_size );
+void Mat_ResizeUp( cv::Mat &mSrc, cv::Mat &mDst, int rect_size );
 
 void Color_Saturation(cv::Mat& mSrc, int increment);
 

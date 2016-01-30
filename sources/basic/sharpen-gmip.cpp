@@ -1,9 +1,9 @@
 #define LOG_TAG "FIH/cvSharpen"
 #define DEBUG_LEVEL                 0
 
-#include "includes.h"
-#include "cvSharpen.h"
-#include "porting/debug.h"
+#include "sharpen-gmip.h"
+#include "common/debug.h"
+#include "common/TypeDefines.h"
 
 using namespace cv;
 

@@ -2,6 +2,46 @@
 
 using namespace cv;
 
+void CorrectGamma( Mat& mSrc, Mat &mDst, double gamma )
+{
+    if ( gamma == 1 ) {
+        mDst = mSrc;
+        return;
+    }
+
+    double inverse_gamma = 1.0 / gamma;
+
+	Mat lut_matrix(1, 256, CV_8UC1 );
+	uchar * ptr = lut_matrix.ptr();
+	for( int i = 0; i < 256; i++ )
+		ptr[i] = (int)( pow( (double) i / 255.0, inverse_gamma ) * 255.0 );
+
+	LUT( mSrc, lut_matrix, mDst );
+}
+
+/*
+ * Extract Y(light) channel from RGB channels.
+ * Currently this function only supports for CV_8UC3 type.
+ */
+void Mat_ConvertAndSplit(Mat& mSrc, Mat* pChannels, int code)
+{
+    Mat mXYZ;
+
+    cvtColor(mSrc, mXYZ, code);
+    split(mXYZ, pChannels);
+}
+
+/*
+ * Parmameter - code: CV_BGR2GRAY, CV_BGR2YCrCb(default)
+ */
+void Mat_MergeAndConvert(Mat* pChannels, Mat& mDst, int code)
+{
+    Mat mXYZ;
+
+    merge(pChannels, 3, mXYZ);
+    cvtColor(mXYZ, mDst, code);
+}
+
 /*
  * Resize an image to a smaller one without changing the ratio. 
  * If the original size is smaller than the parameter(rect_size), just return.

@@ -14,7 +14,8 @@ typedef struct
 typedef enum
 {
     FIH_FaceBeauty_MODE,
-    FIH_LocalHistEqual_MODE
+    FIH_LocalHistEqual_MODE,
+    FIH_Dehazing_MODE
 }FIH_IMGPROC_CMD;
 
 

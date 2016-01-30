@@ -1,4 +1,4 @@
-#include "guidedfilter.h"
+#include "GuidedFilter.h"
 
 static cv::Mat boxfilter(const cv::Mat &I, int r)
 {

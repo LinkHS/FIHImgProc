@@ -60,7 +60,7 @@ LOCAL_C_INCLUDES += $(TOP)/$(MTK_PATH_SOURCE)/external/include
 LOCAL_C_INCLUDES += $(TOP)/bionic
 #LOCAL_C_INCLUDES += $(TOP)/external/stlport/stlport
 
-FIHIMGPROC_PATH := $(TOP)/$(MTK_PATH_SOURCE)/external/fihimgproc/sources
+FIHIMGPROC_PATH := $(TOP)/$(MTK_PATH_SOURCE)/external/FIHImgProc/sources
 
 #For using bsp image processing
 LOCAL_C_INCLUDES += ${LOCAL_PATH}/
@@ -77,15 +77,16 @@ LOCAL_C_INCLUDES += $(TOP)/$(MTK_PATH_SOURCE)/hardware/include
 #LOCAL_SRC_FILES := bspApiForPlatform.cpp
 LOCAL_SRC_FILES := fihimgproc.cpp
 LOCAL_SRC_FILES += app_shdr.cpp
+LOCAL_SRC_FILES += ../sources/basic/GuidedFilter.cpp
 LOCAL_SRC_FILES += ../sources/basic/others.cpp
 
 #for dehazing module
-HAVE_DEHAZING := no
-ifeq (HAVE_DEHAZING, no)
-  LOCAL_SRC_FILES += 3rdParty/dehazing/dehazing.cpp
-  LOCAL_SRC_FILES += 3rdParty/dehazing/functions.cpp
-  LOCAL_SRC_FILES += 3rdParty/dehazing/guidedfilter.cpp
-  LOCAL_SRC_FILES += 3rdParty/dehazing/Transmission.cpp
+HAVE_DEHAZING := yes
+ifeq ($(HAVE_DEHAZING), yes)
+  LOCAL_SRC_FILES += ../sources/modules/dehazing/dehazing.cpp
+  LOCAL_SRC_FILES += ../sources/modules/dehazing/functions.cpp
+  LOCAL_SRC_FILES += ../sources/modules/dehazing/guidedfilter.cpp
+  LOCAL_SRC_FILES += ../sources/modules/dehazing/Transmission.cpp
 endif
 #end for dehazing module
 
